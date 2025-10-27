@@ -1,6 +1,7 @@
 package app
 
 import (
+	uploadhttp "hackathon/internal/domain/upload/transport/http"
 	"hackathon/internal/domain/user/transport/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,5 +13,7 @@ func registerRoutes(router *gin.Engine, db *gorm.DB) {
 	{
 		// auth routes
 		http.RegisterAuthRoutes(api, db)
+
+		uploadhttp.RegisterUploadRoutes(api, db)
 	}
 }

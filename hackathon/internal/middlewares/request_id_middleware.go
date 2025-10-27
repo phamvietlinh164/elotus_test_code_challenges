@@ -20,9 +20,6 @@ func RequestIDMiddleware() gin.HandlerFunc {
 		c.Set(RequestIDKey, requestID)
 		c.Writer.Header().Set(RequestIDKey, requestID)
 
-		// Log the Request-ID
-		//log.Info().Str("request_id", requestID).Msg("Assigned request ID")
-
 		c.Next()
 	}
 }

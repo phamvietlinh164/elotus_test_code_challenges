@@ -16,9 +16,8 @@ func RespondSuccess(c *gin.Context, data interface{}) {
 
 func RespondError(c *gin.Context, code int, msg string) {
 	c.JSON(code, common.BaseApiResponse[any]{
-		HttpRequestStatus: code,
-		Success:           false,
-		Message:           msg,
-		Data:              nil,
+		Success: false,
+		Message: msg,
+		Data:    nil,
 	})
 }

@@ -80,13 +80,13 @@ func (h *AuthHandler) Revoke(c *gin.Context) {
 		return
 	}
 
-	userID, err := utils.GetUserIDFromJWT(req.Token)
+	claims, err := utils.GetClaimsFromJWT(req.Token)
 	if err != nil {
 		utils.RespondError(c, http.StatusUnauthorized, "invalid token")
 		return
 	}
 
-	if err := h.svc.RevokeTokens(userID); err != nil {
+	if err := h.svc.RevokeTokens(claims.UserID); err != nil {
 		utils.RespondError(c, http.StatusInternalServerError, "failed to revoke token")
 		return
 	}

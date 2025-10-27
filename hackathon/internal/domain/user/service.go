@@ -2,7 +2,6 @@ package user
 
 import (
 	"errors"
-	"strconv"
 	"time"
 
 	"hackathon/internal/utils"
@@ -52,7 +51,7 @@ func (s *service) Login(username, password string) (string, error) {
 		return "", errors.New("invalid credentials")
 	}
 
-	token, err := utils.GenerateToken(strconv.FormatUint(uint64(u.ID), 10), u.IsAdmin, 24*time.Hour)
+	token, err := utils.GenerateToken(u.ID, u.IsAdmin, 24*time.Hour)
 	if err != nil {
 		return "", err
 	}
