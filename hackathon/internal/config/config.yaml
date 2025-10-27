@@ -1,0 +1,11 @@
+app:
+  port: ":8080"
+  mode: "debug"
+  log: "info"
+
+database:
+  username: "root"
+  password: "123456"
+  host: "localhost"
+  port: 3306
+  name: "test"
