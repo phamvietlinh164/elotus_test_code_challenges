@@ -5,15 +5,19 @@ import (
 	"strings"
 	"time"
 
+	"hackathon/internal/config"
+
 	"github.com/golang-jwt/jwt/v4"
 )
 
 var (
 	ErrTokenExpired = errors.New("token is expired")
+	secretKey       []byte
 )
 
-// Init sets the secret key for JWT operations. Call once at app startup.
-var secretKey = []byte("a-string-secret-at-least-256-bits-long")
+func Init() {
+	secretKey = []byte(config.Cfg.Jwt.Secret)
+}
 
 // GenerateToken creates HS256 token with iat/exp and custom fields.
 func GenerateToken(userID uint, isAdmin bool, ttl time.Duration) (string, error) {

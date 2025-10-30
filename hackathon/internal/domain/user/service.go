@@ -4,6 +4,7 @@ import (
 	"errors"
 	"time"
 
+	"hackathon/internal/config"
 	"hackathon/internal/utils"
 
 	"golang.org/x/crypto/bcrypt"
@@ -50,8 +51,8 @@ func (s *service) Login(username, password string) (string, error) {
 	if err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password)); err != nil {
 		return "", errors.New("invalid credentials")
 	}
-
-	token, err := utils.GenerateToken(u.ID, u.IsAdmin, 24*time.Hour)
+	duration := time.Duration(config.Cfg.Jwt.Ttl) * time.Hour
+	token, err := utils.GenerateToken(u.ID, u.IsAdmin, duration)
 	if err != nil {
 		return "", err
 	}

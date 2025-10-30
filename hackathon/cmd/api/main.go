@@ -8,11 +8,11 @@ import (
 )
 
 func main() {
-	cfg, err := config.Load()
+	err := config.Load()
 	if err != nil {
 		log.Fatal().Err(err).Msg("failed to load config")
 	}
 
-	server := app.NewServer(cfg)
+	server := app.NewServer()
 	server.Start()
 }

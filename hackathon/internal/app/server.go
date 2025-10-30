@@ -23,10 +23,10 @@ type Server struct {
 	http   *http.Server
 }
 
-func NewServer(cfg *config.Config) *Server {
-	logger.Initialize(cfg)
+func NewServer() *Server {
+	logger.Initialize(config.Cfg)
 
-	db := database.Init(cfg.Database)
+	db := database.Init(config.Cfg.Database)
 
 	engine := gin.New()
 	engine.Use(gin.Recovery())
@@ -38,11 +38,11 @@ func NewServer(cfg *config.Config) *Server {
 	registerRoutes(engine, db)
 
 	srv := &http.Server{
-		Addr:    cfg.App.Port,
+		Addr:    config.Cfg.App.Port,
 		Handler: engine,
 	}
 
-	return &Server{cfg: cfg, engine: engine, http: srv}
+	return &Server{cfg: config.Cfg, engine: engine, http: srv}
 }
 
 func (s *Server) Start() {

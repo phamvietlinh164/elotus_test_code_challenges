@@ -9,3 +9,7 @@ database:
   host: "localhost"
   port: 3306
   name: "test"
+
+jwt:
+  secret: a-string-secret-at-least-256-bits-long
+  ttl: 24
